@@ -1,0 +1,18 @@
+# Standalone crate — own workspace root so it is never absorbed into the
+# SSR app's package graph. Compiles to a tiny cdylib for wasm32.
+[workspace]
+
+[package]
+name = "hero-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

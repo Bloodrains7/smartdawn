@@ -1,0 +1,13 @@
+*
+!Cargo.toml
+!Cargo.lock
+!src/
+!src/**
+!assets/
+!assets/**
+!hero-wasm/
+!hero-wasm/Cargo.toml
+!hero-wasm/Cargo.lock
+!hero-wasm/src/
+!hero-wasm/src/**
+!Dockerfile

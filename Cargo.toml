@@ -1,0 +1,13 @@
+[package]
+name = "smart-dawn-web"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = "0.8.1"
+leptos = { version = "0.7.7", features = ["ssr"] }
+serde = { version = "1.0.228", features = ["derive"] }
+tokio = { version = "1.44.0", features = ["full"] }
+tower-http = { version = "0.6.2", features = ["compression-full", "trace", "fs"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
