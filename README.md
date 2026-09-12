@@ -37,6 +37,28 @@ Otvorte `http://localhost:3108/`. `/healthz` musí odpovedať `200 ok`, `/assets
 
 Po zostavení image spustí `npm run test:container` automatickú kontrolu na náhodnom lokálnom porte a testovací kontajner po skončení odstráni.
 
+## Vercel
+
+`Dockerfile.vercel` zostaví Rust server aj WASM a vloží priečinok `assets` do finálneho image. `vercel.json` smeruje všetky cesty vrátane `/assets/*`, jazykových verzií a `/contact` do rovnakého Axum servera. Predvolený port image je 80, čo zodpovedá smerovaniu Vercelu. Pracovný adresár `/app` je potrebný pre relatívnu cestu `ServeDir::new("assets")`.
+
+1. V projekte Vercel nastavte **Root Directory** na koreň tohto repozitára, kde sú `Cargo.toml` a `Dockerfile.vercel`.
+2. Odstráňte prípadné staré vlastné nastavenia **Build Command**, **Install Command** a **Output Directory** pre statický web. Kontajner zostavuje aplikáciu cez Cargo.
+3. Nastavte `SITE_URL` na finálnu HTTPS adresu. `PORT` nechajte nenastavený; pri vlastnej hodnote ho nastavte v premenných projektu, aby rovnaký port používalo aj smerovanie Vercelu.
+4. Nasaďte verziu repozitára obsahujúcu oba konfiguračné súbory. Pri nasadení cez CLI používa `.vercelignore` zoznam povolených zdrojov; pracovné dokumenty, lokálne buildy a testy sa nenahrávajú.
+5. Overte `/healthz`, načítanie `/assets/style.css` ako `text/css` a `/assets/hero.wasm` ako `application/wasm`. Odpoveď `200` s HTML namiesto CSS znamená nesprávne smerovanie; `404` znamená, že súbor nie je dostupný.
+
+Lokálne overenie kontajnera vrátane celej Playwright sady:
+
+```powershell
+docker build --file Dockerfile.vercel --tag smart-dawn-web:vercel-preview .
+npm run test:vercel
+node e2e/check-container.mjs --vercel --port-override
+```
+
+Prvý beh overí predvolený port 80, správne štýly na mobile aj desktope, JavaScript, WASM a všetky existujúce scenáre. Druhý overí zmenu portu cez `PORT=8080`. Testy po skončení odstránia vlastný kontajner. Toto overuje výsledný image lokálne; smerovanie a nastavenia účtu treba overiť aj na URL Vercelu.
+
+Dokumentácia: [Rust a Docker na Verceli](https://vercel.com/kb/guide/deploy-rust-on-vercel-with-docker), [súbory nasadenia](https://vercel.com/docs/deployments/vercel-ignore).
+
 ## WASM
 
 Pri zmene `hero-wasm/src/lib.rs` obnovte lokálny súbor:

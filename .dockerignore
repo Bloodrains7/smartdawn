@@ -11,3 +11,4 @@
 !hero-wasm/src/
 !hero-wasm/src/**
 !Dockerfile
+!Dockerfile.vercel

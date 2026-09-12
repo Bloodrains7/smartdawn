@@ -1,0 +1,13 @@
+/*
+!Cargo.toml
+!Cargo.lock
+!src/
+!assets/
+!hero-wasm/
+/hero-wasm/*
+!/hero-wasm/Cargo.toml
+!/hero-wasm/Cargo.lock
+!/hero-wasm/src/
+!Dockerfile.vercel
+!.dockerignore
+!vercel.json

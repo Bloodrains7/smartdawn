@@ -150,10 +150,10 @@ test("WASM failure leaves the delivery selector and contact links usable", async
   await expect(page.locator('.contact-form a[href="mailto:hello@smartdawn.eu"]')).toBeVisible();
 });
 
-test("server-rendered offer remains usable without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+test("server-rendered offer remains usable without JavaScript", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:3107/");
+  await page.goto("/");
   await expect(page.locator("h1")).toHaveText(locales[0][2]);
   await expect(page.locator('[data-scope="product"]')).toBeVisible();
   await expect(page.getByTestId("delivery-kind")).toBeHidden();
