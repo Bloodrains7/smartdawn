@@ -7,6 +7,13 @@ const checks = [
   ["brief", "brief preserves visitor text"],
   ["motion", "WASM draws a real graph"],
   ["reduced", "reduced motion skips"],
+  ["portfolio-priority", "Jarvis leads the portfolio"],
+  ["portfolio-catalogue", "portfolio catalogue and inquiry"],
+  ["portfolio-inquiry", "solution inquiry preserves visitor text"],
+  ["portfolio-layout", "portfolio layout keeps every solution readable at 360px"],
+  ["copy-punctuation", "page copy uses plain sentences and concrete benefits in sk"],
+  ["copy-industries", "industry list excludes casinos and retains the other sectors in sk"],
+  ["copy-benefits", "page copy uses plain sentences and concrete benefits in sk"],
 ];
 
 mkdirSync("artifacts/mutations", { recursive: true });
@@ -21,7 +28,7 @@ for (const [mutation, title] of checks) {
   const output = result.stdout + result.stderr;
   writeFileSync(`artifacts/mutations/${mutation}.txt`, output);
   const rejected = result.status === 1 && /[1-9]\d* failed/.test(output) && /expect\(/.test(output)
-    && !output.includes("expect(source).toContain(before)");
+    && !output.includes("expect(source).toContain(before)") && !output.includes("Error: mutation target");
   if (rejected) killed++;
   console.log(`${mutation}: ${rejected ? "killed" : "not proven"}`);
 }

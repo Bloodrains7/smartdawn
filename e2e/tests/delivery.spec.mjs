@@ -23,10 +23,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 const locales = [
-  ["/", "sk", "Váš nápad. Náš kód. Nový začiatok.", "Firemný systém", "Roly a oprávnenia"],
-  ["/en", "en", "Your idea. Our code. A new dawn.", "Business system", "Roles and permissions"],
-  ["/cz", "cs", "Váš nápad. Náš kód. Nový začátek.", "Firemní systém", "Role a oprávnění"],
-  ["/de", "de", "Ihre Idee. Unser Code. Ein neuer Anfang.", "Unternehmenssystem", "Rollen und Rechte"],
+  ["/", "sk", "Softvér pre vašu firmu.", "Firemný systém", "Roly a oprávnenia"],
+  ["/en", "en", "Software for your business.", "Business system", "Roles and permissions"],
+  ["/cz", "cs", "Software pro vaši firmu.", "Firemní systém", "Role a oprávnění"],
+  ["/de", "de", "Software für Ihr Unternehmen.", "Unternehmenssystem", "Rollen und Rechte"],
 ];
 
 for (const [path, lang, headline, label, module] of locales) {

@@ -19,90 +19,74 @@ pub struct DeliveryCopy {
 const SLUGS: [&str; 3] = ["product", "business", "automation"];
 
 const SK: DeliveryCopy = DeliveryCopy {
-    kicker: "Od vízie k riešeniu",
-    question: "Čo spolu postavíme?",
+    kicker: "Pripravme si zadanie",
+    question: "Čo potrebujete vyriešiť?",
     options: ["Webový produkt", "Firemný systém", "Automatizácia"],
-    descriptions: [
-        "Od prvého prototypu po produkt pripravený pre vašich zákazníkov.",
-        "Jeden systém pre vaše procesy, dáta a ľudí. Navrhnutý podľa vašej firmy.",
-        "Prepojíme nástroje a odstránime opakovanú prácu z každodennej prevádzky.",
-    ],
+    descriptions: ["Webová aplikácia alebo portál pre vašich zákazníkov.", "Aplikácia pre interné postupy, údaje a prácu zamestnancov.", "Prepojenie nástrojov a spracovanie pravidelne sa opakujúcich úloh."],
     modules: [
         ["Zákaznícky portál", "Aplikácia a API", "Dáta a prevádzka"],
         ["Pracovné postupy", "Roly a oprávnenia", "Reporty a dáta"],
         ["Vstupné dáta", "Spracovanie úloh", "Kontrola a audit"],
     ],
     extras: ["Prepojenie na existujúce systémy", "AI funkcie"],
-    included: "Súčasť každej dodávky",
+    included: "Ako postupujeme",
     stages: ["Analýza", "Návrh a vývoj", "Testovanie", "Nasadenie a podpora"],
-    brief: "Preniesť výber do zadania",
-    note: "Výber je východisko pre rozhovor. Rozsah, cenu a termín dohodneme po analýze.",
+    brief: "Doplniť výber do správy",
+    note: "Výber nám pomôže pri úvodnom rozhovore. Rozsah, cenu a termín dohodneme spoločne.",
     pause: "Pozastaviť animáciu",
 };
 
 const EN: DeliveryCopy = DeliveryCopy {
-    kicker: "From vision to solution",
-    question: "What shall we build?",
+    kicker: "Prepare a project brief",
+    question: "What do you need to solve?",
     options: ["Web product", "Business system", "Automation"],
-    descriptions: [
-        "From the first prototype to a product ready for your customers.",
-        "One system for your processes, data and people. Designed around your business.",
-        "Connect your tools and remove repetitive work from daily operations.",
-    ],
+    descriptions: ["A web application or portal for your customers.", "An application for internal procedures, data and employee work.", "Connected tools and automated processing of recurring tasks."],
     modules: [
         ["Customer portal", "Application and API", "Data and operations"],
         ["Workflows", "Roles and permissions", "Reports and data"],
         ["Incoming data", "Task processing", "Review and audit"],
     ],
     extras: ["Connect existing systems", "AI features"],
-    included: "Included in every delivery",
+    included: "How we work",
     stages: ["Discovery", "Design and development", "Testing", "Launch and support"],
-    brief: "Add selection to project brief",
-    note: "A starting point for a conversation. Scope, price and timeline follow discovery.",
+    brief: "Add selection to your message",
+    note: "Your selection helps with our first conversation. We will agree on scope, price and timing together.",
     pause: "Pause animation",
 };
 
 const CS: DeliveryCopy = DeliveryCopy {
-    kicker: "Od vize k řešení",
-    question: "Co spolu postavíme?",
+    kicker: "Připravme si zadání",
+    question: "Co potřebujete vyřešit?",
     options: ["Webový produkt", "Firemní systém", "Automatizace"],
-    descriptions: [
-        "Od prvního prototypu po produkt připravený pro vaše zákazníky.",
-        "Jeden systém pro vaše procesy, data a lidi. Navržený podle vaší firmy.",
-        "Propojíme nástroje a odstraníme opakovanou práci z každodenního provozu.",
-    ],
+    descriptions: ["Webová aplikace nebo portál pro vaše zákazníky.", "Aplikace pro interní postupy, údaje a práci zaměstnanců.", "Propojení nástrojů a zpracování pravidelně se opakujících úkolů."],
     modules: [
         ["Zákaznický portál", "Aplikace a API", "Data a provoz"],
         ["Pracovní postupy", "Role a oprávnění", "Reporty a data"],
         ["Vstupní data", "Zpracování úloh", "Kontrola a audit"],
     ],
     extras: ["Propojení se stávajícími systémy", "AI funkce"],
-    included: "Součást každé dodávky",
+    included: "Jak postupujeme",
     stages: ["Analýza", "Návrh a vývoj", "Testování", "Nasazení a podpora"],
-    brief: "Přenést výběr do zadání",
-    note: "Výběr je východiskem pro rozhovor. Rozsah, cenu a termín dohodneme po analýze.",
+    brief: "Doplnit výběr do zprávy",
+    note: "Výběr nám pomůže při úvodním rozhovoru. Rozsah, cenu a termín dohodneme společně.",
     pause: "Pozastavit animaci",
 };
 
 const DE: DeliveryCopy = DeliveryCopy {
-    kicker: "Von der Vision zur Lösung",
-    question: "Was entwickeln wir gemeinsam?",
+    kicker: "Eine Projektanfrage vorbereiten",
+    question: "Was möchten Sie lösen?",
     options: ["Webprodukt", "Unternehmenssystem", "Automatisierung"],
-    descriptions: [
-        "Vom ersten Prototyp bis zum einsatzbereiten Produkt für Ihre Kunden.",
-        "Ein System für Prozesse, Daten und Menschen. Auf Ihr Unternehmen zugeschnitten.",
-        "Wir verbinden Ihre Werkzeuge und automatisieren wiederkehrende Aufgaben im Alltag.",
-    ],
+    descriptions: ["Eine Webanwendung oder ein Portal für Ihre Kunden.", "Eine Anwendung für interne Abläufe, Daten und die Arbeit Ihrer Mitarbeiter.", "Verbundene Werkzeuge und die Verarbeitung wiederkehrender Aufgaben."],
     modules: [
         ["Kundenportal", "Anwendung und API", "Daten und Betrieb"],
         ["Arbeitsabläufe", "Rollen und Rechte", "Berichte und Daten"],
         ["Eingangsdaten", "Aufgabenverarbeitung", "Kontrolle und Audit"],
     ],
     extras: ["Bestehende Systeme anbinden", "KI-Funktionen"],
-    included: "In jeder Lieferung enthalten",
+    included: "Unser Vorgehen",
     stages: ["Analyse", "Entwurf und Entwicklung", "Tests", "Einführung und Support"],
-    brief: "Auswahl zur Projektanfrage hinzufügen",
-    note: "Ein Ausgangspunkt für unser Gespräch. Umfang, Preis und Zeitplan klären wir nach der Analyse.",
+    brief: "Auswahl zur Nachricht hinzufügen",
+    note: "Ihre Auswahl hilft beim ersten Gespräch. Umfang, Preis und Termin vereinbaren wir gemeinsam.",
     pause: "Animation pausieren",
 };
 
@@ -120,7 +104,7 @@ pub fn DeliveryPreview(lang: Lang) -> impl IntoView {
     let d = copy(lang);
     view! {
         <aside id="navrh" class="delivery-preview" aria-labelledby="delivery-title" data-testid="delivery-preview">
-            <div class="delivery-caption"><span class="delivery-light" aria-hidden="true"></span>{d.kicker}<span aria-hidden="true">"01 — 03"</span></div>
+            <div class="delivery-caption"><span class="delivery-light" aria-hidden="true"></span>{d.kicker}<span aria-hidden="true">"01 / 03"</span></div>
             <h2 id="delivery-title">{d.question}</h2>
             <div class="delivery-controls" hidden>
                 <label class="sr-only" for="delivery-kind">{d.question}</label>

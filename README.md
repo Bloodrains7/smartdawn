@@ -4,6 +4,10 @@ Firemný web pre kompletné dodávky softvéru na mieru. Rust, Leptos SSR a Axum
 
 Úvod obsahuje výber webového produktu, firemného systému alebo automatizácie. Voliteľné integrácie a AI funkcie sa prenášajú do zadania spolu s vybranými modulmi. Prenos zachováva vlastný text návštevníka a nič automaticky neodosiela. Jazykové verzie: `/`, `/en`, `/cz`, `/de`.
 
+Portfólio predstavuje Jarvis ako hlavné riešenie pre firemnú operatívu, s odkazom z úvodu a tromi príkladmi využitia. Nasledujú Cadence pre plánovanie práce a Tally pre výkazy, potom Forge, MR Reviewer, ArchGen, Mapovanie dát pre internetové obchody, Parley / vox a Own IDE. Obsah a poradie produktov sú v `src/portfolio.rs`, vo všetkých štyroch jazykoch.
+
+Odkazy pri riešeniach doplnia názov a zameranie produktu do kontaktného zadania. Výber iného riešenia alebo dodávky nahradí iba predchádzajúci vložený text a zachová dopísanú správu. Bez JavaScriptu odkazy vedú priamo na kontaktný formulár. `e2e/tests/portfolio.spec.mjs` overuje poradie, preklady, každé riešenie, klávesnicu aj zobrazenie bez JavaScriptu. Playwright ho automaticky zahŕňa cez `testMatch` v `playwright.config.mjs`. Náhľady portfólia sú po teste v `artifacts/portfolio-{360,768,1440}.png`; mutačné kontroly sú súčasťou `npm run test:mutations`.
+
 ## Lokálne spustenie
 
 ```powershell
@@ -85,4 +89,4 @@ Playwright spúšťa vlastný Rust server na porte 3107. Scenáre overujú všet
 
 ## Pred verejným spustením
 
-Kontaktný endpoint `/contact` je pôvodný prototyp: validuje vstup a zapisuje metadáta do logu, ale správu neposiela ani trvalo neukladá. Zobrazené potvrdenie preto zatiaľ nepotvrdzuje doručenie. Pred spustením treba pripojiť doručovanie, správne spracovať jeho zlyhanie a overiť schránku `hello@smartdawn.eu`. Overte tiež finálnu doménu, firemné údaje a pôvodné referencie či metriky na webe.
+Kontaktný endpoint `/contact` je pôvodný prototyp: validuje vstup a zapisuje metadáta do logu, ale správu neposiela ani trvalo neukladá. Zobrazené potvrdenie preto zatiaľ nepotvrdzuje doručenie. Pred spustením treba pripojiť doručovanie, správne spracovať jeho zlyhanie a overiť schránku `hello@smartdawn.eu`. Overte tiež finálnu doménu a firemné údaje.

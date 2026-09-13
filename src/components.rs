@@ -1,22 +1,11 @@
 use leptos::prelude::*;
 
-use crate::i18n::{dict, Dict, Lang, ThemeTxt, UseCaseTxt};
+use crate::i18n::{dict, Dict, Lang, UseCaseTxt};
 use crate::delivery::{copy as delivery_copy, DeliveryPreview, DeliveryStages};
+use crate::portfolio::{Portfolio, PortfolioTeaser};
 
 const NAV_HREF: [&str; 6] = ["#praca", "#sluzby", "#automatizacie", "#proces", "#stack", "#kontakt"];
 const NUM2: [&str; 7] = ["01", "02", "03", "04", "05", "06", "07"];
-
-/// Fixed (language-independent) metadata per capability theme: proof project
-/// name, tech tags, accent colour, layout side, and which visual to render.
-const THEME_META: [(&str, &[&str], &str, bool, u8); 7] = [
-    ("Roman Empire", &["Rust", "Tauri", "DSPy", "Agentic"], "dawn", false, 0),
-    ("Voice", &["Whisper", "XTTS-v2", "Claude", "Local-first"], "sky", true, 1),
-    ("Forge", &["Rust", "MCP", "Playwright", "OWASP"], "electric", false, 2),
-    ("ArchGen", &["LangGraph", "DSPy", "pyo3", "Tauri"], "mint", true, 3),
-    ("REPRE", &["Django REST", "Gemini Vision", "Celery", "POHODA"], "sky", false, 4),
-    ("AI Avatar", &["Gemini Live", "FastAPI", "Lip-sync", "WebSocket"], "electric", true, 5),
-    ("Open Claw", &["Python", "Whisper", "Telegram", "GitLab"], "dawn", false, 6),
-];
 
 const INTEGRATIONS: [&str; 10] = [
     "Selenium", "Playwright", "Robot FW", "AI Agent", "LLM · RAG",
@@ -111,7 +100,8 @@ pub fn App(lang: Lang) -> impl IntoView {
                             <a class="btn primary lg" href="#navrh">{d.hero_cta1}<span aria-hidden="true">"↗"</span></a>
                             <a class="btn ghost lg" href="#kontakt">{d.hero_cta2}</a>
                         </div>
-                        <div class="hero-signature"><span class="signature-line" aria-hidden="true"></span>"SMART DAWN / SOFTWARE DELIVERY"</div>
+                        <PortfolioTeaser lang=lang/>
+                        <div class="hero-signature"><span class="signature-line" aria-hidden="true"></span>"SMART DAWN"</div>
                       </div>
                       <DeliveryPreview lang=lang/>
                     </div>
@@ -140,29 +130,7 @@ pub fn App(lang: Lang) -> impl IntoView {
                     </div>
                 </section>
 
-                <section id="praca" class="themes">
-                    <div class="shell">
-                        <div class="section-head" data-reveal>
-                            <span class="section-kicker">{d.themes_kicker}</span>
-                            <h2 class="section-title">{d.themes_title}</h2>
-                            <p class="section-intro">{d.themes_intro}</p>
-                        </div>
-                    </div>
-                    {(0..7).map(|i| {
-                        let t: &'static ThemeTxt = &d.themes[i];
-                        let (name, tags, accent, reverse, vk) = THEME_META[i];
-                        let visual = match vk {
-                            0 => visual_agents().into_any(),
-                            1 => visual_voice().into_any(),
-                            2 => visual_testing().into_any(),
-                            3 => visual_arch().into_any(),
-                            4 => visual_data().into_any(),
-                            5 => visual_avatar().into_any(),
-                            _ => visual_ops().into_any(),
-                        };
-                        theme_section(NUM2[i], t, name, tags, accent, reverse, d.proof_label, visual)
-                    }).collect::<Vec<_>>()}
-                </section>
+                <Portfolio lang=lang/>
 
                 <section class="interview" aria-label="Founder">
                     <div class="shell interview-grid">
@@ -214,7 +182,7 @@ pub fn App(lang: Lang) -> impl IntoView {
                                 <div class="orbit-core" aria-hidden="true">
                                     <span class="orbit-core-ring"></span>
                                     <span class="orbit-core-ring orbit-core-ring--2"></span>
-                                    <span class="orbit-core-label">"POD"<br/>"RUNTIME"</span>
+                                    <span class="orbit-core-label">"SMART"<br/>"DAWN"</span>
                                 </div>
                                 <div class="orbit-ring" aria-hidden="true">
                                     {
@@ -226,7 +194,6 @@ pub fn App(lang: Lang) -> impl IntoView {
                                                 <div class="pod-card" style={style}>
                                                     <span class="pod-card-dot"></span>
                                                     <span class="pod-card-name">{*name}</span>
-                                                    <span class="pod-card-tag">"· pod"</span>
                                                 </div>
                                             }
                                         }).collect::<Vec<_>>()
@@ -280,7 +247,7 @@ pub fn App(lang: Lang) -> impl IntoView {
                         <div class="impact-grid">
                             {d.impact.iter().map(|m| view! {
                                 <div class="impact-card" data-reveal>
-                                    <div class="impact-value" data-count={m.a}>{m.a}</div>
+                                    <div class="impact-value">{m.a}</div>
                                     <div class="impact-unit">{m.b}</div>
                                     <div class="impact-desc">{m.c}</div>
                                 </div>
@@ -373,12 +340,12 @@ pub fn App(lang: Lang) -> impl IntoView {
                             <div>
                                 <div class="stack-group-label">{d.st_groups[4]}</div>
                                 <div class="stack">
-                                    <span class="pill pill--ai">"LLM integrácie"</span>
+                                    <span class="pill pill--ai">"LLM"</span>
                                     <span class="pill pill--ai">"GraphRAG"</span>
                                     <span class="pill pill--ai">"DSPy"</span>
                                     <span class="pill pill--ai">"MCP"</span>
                                     <span class="pill pill--ai">"Agentic AI"</span>
-                                    <span class="pill pill--ai">"Vektorové DB"</span>
+                                    <span class="pill pill--ai">"Vector DB"</span>
                                     <span class="pill pill--ai">"Apache Camel"</span>
                                     <span class="pill pill--ai">"Keycloak"</span>
                                 </div>
@@ -479,43 +446,6 @@ pub fn App(lang: Lang) -> impl IntoView {
     }
 }
 
-fn theme_section(
-    num: &'static str,
-    t: &'static ThemeTxt,
-    proof_name: &'static str,
-    tags: &'static [&'static str],
-    accent: &'static str,
-    reverse: bool,
-    proof_label: &'static str,
-    visual: AnyView,
-) -> impl IntoView {
-    let cls = if reverse { "theme theme--reverse" } else { "theme" };
-    let proof_cls = format!("proof-card proof--{}", accent);
-    view! {
-        <div class={cls} data-reveal>
-            <div class="shell theme-grid">
-                <div class="theme-copy">
-                    <div class="theme-num">{num}</div>
-                    <span class="section-kicker">{t.kicker}</span>
-                    <h3 class="theme-title">{t.title}</h3>
-                    <p class="theme-desc">{t.desc}</p>
-                    <div class={proof_cls}>
-                        <span class="proof-label">{proof_label}</span>
-                        <div class="proof-head">
-                            <strong>{proof_name}</strong>
-                            <span class="proof-tagline">{t.proof_tagline}</span>
-                        </div>
-                        <div class="proof-tags">
-                            {tags.iter().map(|x| view! { <span class="chip">{*x}</span> }).collect::<Vec<_>>()}
-                        </div>
-                    </div>
-                </div>
-                <div class="theme-visual">{visual}</div>
-            </div>
-        </div>
-    }
-}
-
 fn use_case_card(badge: &'static str, uc: &'static UseCaseTxt) -> impl IntoView {
     let last = uc.flow.len().saturating_sub(1);
     view! {
@@ -537,179 +467,6 @@ fn use_case_card(badge: &'static str, uc: &'static UseCaseTxt) -> impl IntoView 
             </div>
             <div class="use-case-result">{uc.result}</div>
         </article>
-    }
-}
-
-fn visual_agents() -> impl IntoView {
-    let nodes: [(f32, f32, &str); 6] = [
-        (300.0, 150.0, "Senát"),
-        (240.0, 52.0, "Légia"),
-        (120.0, 52.0, "Gladiátor"),
-        (60.0, 150.0, "Censor"),
-        (120.0, 248.0, "Vigil"),
-        (240.0, 248.0, "Courier"),
-    ];
-    view! {
-        <div class="viz viz-agents">
-            <svg viewBox="0 0 360 300" class="ag-svg" preserveAspectRatio="xMidYMid meet">
-                {nodes.iter().enumerate().map(|(i, &(x, y, _))| {
-                    let st = format!("--d:{}ms", i * 260);
-                    view! { <line class="ag-link" x1="180" y1="150" x2={x.to_string()} y2={y.to_string()} style={st}/> }
-                }).collect::<Vec<_>>()}
-                <circle class="ag-core" cx="180" cy="150" r="30"/>
-                <text class="ag-core-t" x="180" y="154">"TASK"</text>
-                {nodes.iter().enumerate().map(|(i, &(x, y, label))| {
-                    let st = format!("--d:{}ms", i * 260);
-                    let ly = (y + 27.0).to_string();
-                    view! {
-                        <g>
-                            <circle class="ag-node" cx={x.to_string()} cy={y.to_string()} r="13" style={st}/>
-                            <text class="ag-node-t" x={x.to_string()} y={ly}>{label}</text>
-                        </g>
-                    }
-                }).collect::<Vec<_>>()}
-            </svg>
-        </div>
-    }
-}
-
-fn visual_voice() -> impl IntoView {
-    view! {
-        <div class="viz viz-voice">
-            <div class="voice-orb">
-                <div class="voice-eq">
-                    {(0..11).map(|i| {
-                        let st = format!("--d:{}ms", (i * 110) % 760);
-                        view! { <span class="voice-bar" style={st}></span> }
-                    }).collect::<Vec<_>>()}
-                </div>
-            </div>
-            <div class="voice-pipe">
-                <span class="vp">"wake"</span>
-                <i class="vp-arr">"→"</i>
-                <span class="vp">"STT"</span>
-                <i class="vp-arr">"→"</i>
-                <span class="vp">"LLM"</span>
-                <i class="vp-arr">"→"</i>
-                <span class="vp">"TTS"</span>
-            </div>
-        </div>
-    }
-}
-
-fn visual_testing() -> impl IntoView {
-    let rows = ["GET /orders", "POST /checkout", "GraphQL · cart", "gRPC · Pay", "WS · stream"];
-    view! {
-        <div class="viz viz-test">
-            <div class="test-ring">
-                <span class="test-ring-num">"98%"</span>
-                <span class="test-ring-lbl">"pass"</span>
-            </div>
-            <ul class="test-rows">
-                {rows.iter().enumerate().map(|(i, r)| {
-                    let st = format!("--d:{}ms", i * 360);
-                    view! {
-                        <li class="test-row" style={st}>
-                            <span class="test-name">{*r}</span>
-                            <span class="test-pass">"PASS"</span>
-                        </li>
-                    }
-                }).collect::<Vec<_>>()}
-            </ul>
-        </div>
-    }
-}
-
-fn visual_arch() -> impl IntoView {
-    view! {
-        <div class="viz viz-arch">
-            <svg viewBox="0 0 320 230" class="arch-svg" preserveAspectRatio="xMidYMid meet">
-                <line class="arch-edge" x1="160" y1="58" x2="80" y2="130" style="--d:200ms"/>
-                <line class="arch-edge" x1="160" y1="58" x2="240" y2="130" style="--d:500ms"/>
-                <line class="arch-edge" x1="80" y1="130" x2="160" y2="188" style="--d:800ms"/>
-                <line class="arch-edge" x1="240" y1="130" x2="160" y2="188" style="--d:1100ms"/>
-                <g class="arch-box" style="--d:0ms"><rect x="122" y="30" width="76" height="40" rx="8"/><text x="160" y="54">"UI"</text></g>
-                <g class="arch-box" style="--d:300ms"><rect x="42" y="110" width="76" height="40" rx="8"/><text x="80" y="134">"API"</text></g>
-                <g class="arch-box" style="--d:600ms"><rect x="202" y="110" width="76" height="40" rx="8"/><text x="240" y="134">"Auth"</text></g>
-                <g class="arch-box" style="--d:900ms"><rect x="122" y="168" width="76" height="40" rx="8"/><text x="160" y="192">"DB"</text></g>
-            </svg>
-        </div>
-    }
-}
-
-fn visual_data() -> impl IntoView {
-    let stages = ["Feed", "Preklad", "Vision", "POHODA"];
-    view! {
-        <div class="viz viz-data">
-            <div class="data-rail">
-                <div class="data-node-row">
-                    {(0..4).map(|_| view! { <span class="data-node"></span> }).collect::<Vec<_>>()}
-                </div>
-                {(0..4).map(|i| {
-                    let st = format!("--d:{}ms", i * 850);
-                    view! { <span class="data-packet" style={st}></span> }
-                }).collect::<Vec<_>>()}
-            </div>
-            <div class="data-labels">
-                {stages.iter().map(|s| view! { <span class="data-lbl">{*s}</span> }).collect::<Vec<_>>()}
-            </div>
-        </div>
-    }
-}
-
-fn visual_avatar() -> impl IntoView {
-    view! {
-        <div class="viz viz-avatar">
-            <div class="avatar-head">
-                <span class="avatar-live" aria-hidden="true">"● LIVE"</span>
-                <span class="avatar-eye"></span>
-                <span class="avatar-eye avatar-eye--r"></span>
-                <div class="avatar-mouth">
-                    {(0..7).map(|i| {
-                        let st = format!("--d:{}ms", (i * 90) % 500);
-                        view! { <span class="avatar-bar" style={st}></span> }
-                    }).collect::<Vec<_>>()}
-                </div>
-            </div>
-            <div class="avatar-langs">
-                <span class="vp">"SK"</span>
-                <span class="vp">"EN"</span>
-                <span class="vp">"lip-sync · 480 ms"</span>
-            </div>
-        </div>
-    }
-}
-
-fn visual_ops() -> impl IntoView {
-    let nodes: [(f32, f32, &str); 6] = [
-        (300.0, 150.0, "E-mail"),
-        (240.0, 52.0, "Slack"),
-        (120.0, 52.0, "Notion"),
-        (60.0, 150.0, "GitLab"),
-        (120.0, 248.0, "Telegram"),
-        (240.0, 248.0, "Meet"),
-    ];
-    view! {
-        <div class="viz viz-agents">
-            <svg viewBox="0 0 360 300" class="ag-svg" preserveAspectRatio="xMidYMid meet">
-                {nodes.iter().enumerate().map(|(i, &(x, y, _))| {
-                    let st = format!("--d:{}ms", i * 260);
-                    view! { <line class="ag-link" x1="180" y1="150" x2={x.to_string()} y2={y.to_string()} style={st}/> }
-                }).collect::<Vec<_>>()}
-                <circle class="ag-core" cx="180" cy="150" r="30"/>
-                <text class="ag-core-t" x="180" y="154">"AI"</text>
-                {nodes.iter().enumerate().map(|(i, &(x, y, label))| {
-                    let st = format!("--d:{}ms", i * 260);
-                    let ly = (y + 27.0).to_string();
-                    view! {
-                        <g>
-                            <circle class="ag-node" cx={x.to_string()} cy={y.to_string()} r="13" style={st}/>
-                            <text class="ag-node-t" x={x.to_string()} y={ly}>{label}</text>
-                        </g>
-                    }
-                }).collect::<Vec<_>>()}
-            </svg>
-        </div>
     }
 }
 

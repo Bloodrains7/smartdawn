@@ -1,6 +1,7 @@
 mod components;
 mod delivery;
 mod i18n;
+mod portfolio;
 mod routes;
 mod seo;
 mod validation;
